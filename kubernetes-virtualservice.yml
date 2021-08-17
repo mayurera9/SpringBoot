@@ -28,6 +28,6 @@ spec:
         prefix: /anthos
     route:
     - destination:
-        host: spring-boot-service
+        host: spring-boot-app-service
         port:
           number: 8080
