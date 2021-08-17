@@ -1,0 +1,33 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: spring-boot-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sprimg-boot
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - spring-boot-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /anthos
+    route:
+    - destination:
+        host: spring-boot-service
+        port:
+          number: 8080
